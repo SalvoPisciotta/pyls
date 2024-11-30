@@ -24,6 +24,7 @@ def get_parser():
         default=False,
         help="Get all the items elements, included the one starting with .",
     )
+
     parser.add_argument(
         "-l",
         action="store_true",
