@@ -13,7 +13,7 @@ check_args(args)
 with open(json_input) as f:
     json_structure = json.load(f)
 
-ls = PyLS(json_dir_structure= json_structure, options = args)
+ls = PyLS(json_structure= json_structure, options = args)
 
 ls.generate_output()
 print(ls.get_output())
