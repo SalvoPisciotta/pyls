@@ -1,2 +1,5 @@
 *.pdf 
 *.json
+__pycache__
+*.txt
+test
