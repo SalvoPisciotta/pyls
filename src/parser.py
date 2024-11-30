@@ -16,7 +16,13 @@ def get_parser():
         "-A",
         action="store_true",
         default=False,
-        help="Get all the files, included the one starting with .",
+        help="Get all the items elements, included the one starting with .",
+    )
+    parser.add_argument(
+        "-l",
+        action="store_true",
+        default=False,
+        help="Get additional items information"
     )
 
     return parser
