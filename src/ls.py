@@ -13,6 +13,14 @@ class PyLS:
         self.set_root_structure(json_structure)
 
     def set_root_structure(self, json_structure):
+        """
+        Sets the root structure of the JSON data.
+        This method sets the root structure of the JSON based on the input path parameter
+        If an `InvalidPathError`is raised, stop_execution_with_message method is called.
+        Args:
+            json_structure (dict): The JSON structure to be set as the root.
+        """
+
         if self.options.path == '.' or self.options.path == json_structure['name']:
             self.json_root_structure = json_structure
         else:
@@ -22,6 +30,14 @@ class PyLS:
                 self.stop_execution_with_message(error)
 
     def get_root_structure(self, json_structure):
+        """
+        Retrieves the root structure from a given JSON structure based on the specified path.
+        Args:
+            json_structure (dict): The JSON structure to navigate.
+        Returns:
+            dict: The root structure corresponding to the specified path.
+        """
+        
         items_to_root = [item for item in self.options.path.split('/') if item != '.']
         root_structure = json_structure
         for item_name in items_to_root:
@@ -116,5 +132,11 @@ class PyLS:
                 self.output += "\n"
 
     def stop_execution_with_message(self, message):
+        """
+        Stops the execution of the program and prints the relative error message.
+        Args:
+            message (str): The message to be printed before stopping the execution.
+        """
+        
         print(f"{message}")
         sys.exit()
