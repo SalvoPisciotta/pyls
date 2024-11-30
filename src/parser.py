@@ -52,6 +52,7 @@ def get_parser():
 
 def _check_args(args):
     if args.filter not in ["file", "dir", None]:
+    if args.filter not in ["file", "dir", None]:
         raise InvalidArgumentError(
             f"error: {args.filter} is not a valid filter criteria."
             + "Available filters are 'file' or 'dir'.")
