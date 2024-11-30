@@ -32,6 +32,8 @@ class PyLS:
             list: A list of sub-items extracted from the directory contents.
         """
         sub_items = [item for item in dir_contents]
+        if self.options.r:
+            sub_items.reverse()
         return sub_items
 
     def generate_item_names_output(self, dir_contents: json):

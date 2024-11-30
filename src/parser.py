@@ -24,5 +24,11 @@ def get_parser():
         default=False,
         help="Get additional items information"
     )
+    parser.add_argument(
+        "-r",
+        action="store_true",
+        default=False,
+        help="Get items in reverse order",
+    )
 
     return parser
