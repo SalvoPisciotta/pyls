@@ -62,8 +62,8 @@ class PyLS:
                 continue
             else:
                 self.output += item["permissions"] + " "
+                self.output += str(item["size"]) + " "
                 date_time = datetime.fromtimestamp(item["time_modified"])
                 self.output += date_time.strftime("%b %d %H:%M") + " "
-                self.output += str(item["size"]) + " "
                 self.output += item["name"] + " "
                 self.output += "\n"
