@@ -2,6 +2,7 @@ import json
 import argparse
 from datetime import datetime
 from src.exception import InvalidPathError
+from src.utils import human_readable_datetime, human_readable_file_size
 import sys
 
 class PyLS:
@@ -106,9 +107,11 @@ class PyLS:
                 continue
             else:
                 self.output += item["permissions"] + " "
-                self.output += str(item["size"]) + " "
-                date_time = datetime.fromtimestamp(item["time_modified"])
-                self.output += date_time.strftime("%b %d %H:%M") + " "
+                if self.options.h:
+                    self.output += human_readable_file_size(item["size"])+ " "
+                else:
+                    self.output += str(item["size"]) + " "
+                self.output += human_readable_datetime(item["time_modified"]) + " "
                 self.output += item["name"] + " "
                 self.output += "\n"
 
