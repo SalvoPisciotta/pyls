@@ -1,4 +1,6 @@
 import argparse
+from src.exception import InvalidArgumentError
+import sys
 
 
 def get_parser():
@@ -22,7 +24,7 @@ def get_parser():
         "-l",
         action="store_true",
         default=False,
-        help="Get additional items information"
+        help="Get additional items information",
     )
     parser.add_argument(
         "-r",
@@ -36,5 +38,23 @@ def get_parser():
         default=False,
         help="Get items sorted by time modified property",
     )
-
+    parser.add_argument(
+        "--filter",
+        default=None,
+        help="Filter options: 'file' for files, 'dir' for directories."
+    )
     return parser
+
+def _check_args(args):
+    if args.filter not in ["file", "dir"]:
+        raise InvalidArgumentError(
+            f"error: {args.filter} is not a valid filter criteria."
+            + "Available filters are 'file' or 'dir'.")
+    
+def check_args(args):
+    try:
+        _check_args(args)  # This will raise the error
+    except InvalidArgumentError as e:
+        # Print only the message without traceback
+        print(f"{e}")
+        sys.exit()

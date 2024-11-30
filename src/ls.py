@@ -6,7 +6,7 @@ from datetime import datetime
 class PyLS:
 
     def __init__(self, json_dir_structure: json, options: argparse.ArgumentParser):
-        self.output = ''
+        self.output = ""
         self.options = options
         self.json_dir_structure = json_dir_structure
 
@@ -22,6 +22,21 @@ class PyLS:
 
     def get_output(self):
         return self.output
+    
+    def filtered_sublist(self, directory_contents: json, item_type: str):
+        """
+        Filters the directory contents based on the specified item type.
+        Args:
+            directory_contents (json): A JSON object representing the contents of a directory.
+            item_type (str): The type of items to filter ('dir' for directories, 'file' for files).
+        Returns:
+            list: A list of filtered items based on the specified item type.
+        """
+        if item_type == 'dir':
+            sub_items = [item for item in directory_contents if 'contents' in item.keys()]
+        elif item_type == 'file':
+            sub_items = [item for item in directory_contents if 'contents' not in item.keys()]
+        return sub_items
 
     def get_subitems_list(self, dir_contents: json):
         """
@@ -32,7 +47,11 @@ class PyLS:
         Returns:
             list: A list of sub-items extracted from the directory contents.
         """
-        sub_items = [item for item in dir_contents]
+        
+        if self.options.filter is not None:
+            sub_items = self.filtered_sublist(dir_contents, self.options.filter)
+        else:
+            sub_items = [item for item in dir_contents]
         if self.options.t:
             sub_items = sorted(sub_items, key=lambda x: x["time_modified"])
         if self.options.r:
@@ -46,10 +65,10 @@ class PyLS:
             dir_contents (json): A JSON object containing the directory contents.
         """
         for item in self.get_subitems_list(dir_contents):
-            if item["name"][0] == '.' and not self.options.A:
+            if item["name"][0] == "." and not self.options.A:
                 continue
             else:
-                self.output += item["name"] + ' '
+                self.output += item["name"] + " "
 
     def generate_item_info_output(self, directory_contents: json):
         """
