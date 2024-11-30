@@ -14,6 +14,10 @@ def get_parser():
     """
 
     parser = argparse.ArgumentParser(description="Parser for pyls")
+    parser.add_argument("path",
+                        default= '.',
+                        nargs='?',
+                        help="Path of the folder to navigate on with ls")
     parser.add_argument(
         "-A",
         action="store_true",
@@ -46,7 +50,7 @@ def get_parser():
     return parser
 
 def _check_args(args):
-    if args.filter not in ["file", "dir"]:
+    if args.filter not in ["file", "dir", None]:
         raise InvalidArgumentError(
             f"error: {args.filter} is not a valid filter criteria."
             + "Available filters are 'file' or 'dir'.")
