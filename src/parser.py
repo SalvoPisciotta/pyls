@@ -30,5 +30,11 @@ def get_parser():
         default=False,
         help="Get items in reverse order",
     )
+    parser.add_argument(
+        "-t",
+        action="store_true",
+        default=False,
+        help="Get items sorted by time modified property",
+    )
 
     return parser

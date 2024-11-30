@@ -25,13 +25,16 @@ class PyLS:
 
     def get_subitems_list(self, dir_contents: json):
         """
-        Extracts and returns a list of sub-items from the given directory contents.
+        Extracts and returns list of sub-items from the given directory contents.
+        Order of the list is based on the input options.
         Args:
             dir_contents (json): A JSON object containing the directory contents.
         Returns:
             list: A list of sub-items extracted from the directory contents.
         """
         sub_items = [item for item in dir_contents]
+        if self.options.t:
+            sub_items = sorted(sub_items, key=lambda x: x["time_modified"])
         if self.options.r:
             sub_items.reverse()
         return sub_items
