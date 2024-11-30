@@ -24,6 +24,7 @@ def get_parser():
         default=False,
         help="Get all the items elements, included the one starting with .",
     )
+
     parser.add_argument(
         "-l",
         action="store_true",
@@ -50,6 +51,7 @@ def get_parser():
     return parser
 
 def _check_args(args):
+    if args.filter not in ["file", "dir", None]:
     if args.filter not in ["file", "dir", None]:
         raise InvalidArgumentError(
             f"error: {args.filter} is not a valid filter criteria."
