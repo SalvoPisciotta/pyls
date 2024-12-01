@@ -134,7 +134,6 @@ pytest
 ```
 
 Ensure you have `pytest` installed. You can install it using pip with:
-Ensure you have `pytest` installed. You can install it using pip with:
 
 ```sh
 pip install pytest
