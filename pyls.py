@@ -1,12 +1,17 @@
 from src.ls import PyLS
 from src.parser import get_parser, check_args
 import json
+import sys
 
 json_input = "structure.json"
 
 parser = get_parser()
 
 args = parser.parse_args()
+
+if args.help:
+    parser.print_help()
+    sys.exit()
 
 check_args(args)
 
