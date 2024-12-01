@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyls"
+version = "0.1.0"
+description = "Python application that simulates the `ls` command"
+authors = [{name = "Salvo Pisciotta", email = "salvopisciotta97@gmail.com"}]
+dependencies = []
+readme = {file = "README.txt", content-type = "text/markdown"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pyls"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+pyls = ["structure.json"]
+
+[project.scripts]
+pyls = "pyls.pyls:main"

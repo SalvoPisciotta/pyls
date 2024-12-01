@@ -2,3 +2,6 @@
 structure.json
 __pycache__
 *.txt
+pyls.egg-info
+dist 
+build
