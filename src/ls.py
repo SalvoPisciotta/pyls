@@ -3,7 +3,7 @@ from src.exceptions import InvalidPathError
 from src.utils import human_readable_datetime, human_readable_file_size
 import sys
 from typing import Dict, Union, List
-from structure_types import Directory, File, JsonFileSystemStructure
+from src.structure_types import Directory, File, JsonFileSystemStructure
 
 class PyLS:
 
@@ -149,4 +149,4 @@ class PyLS:
         """
         
         print(f"{message}")
-        sys.exit()
+        sys.exit(0)
