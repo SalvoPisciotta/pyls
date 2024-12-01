@@ -1,0 +1,28 @@
+{
+    "name": "root",
+    "size": 4096,
+    "time_modified": 1699957865,
+    "permissions": "-rw-r--r--",
+    "contents": [
+        {
+            "name": "file1",
+            "size": 1024,
+            "time_modified": 1699957865,
+            "permissions": "-rw-r--r--"
+        },
+        {
+            "name": "dir1",
+            "size": 4096,
+            "time_modified": 1699957865,
+            "permissions": "drwxr-xr-x",
+            "contents": [
+                {
+                    "name": "file2",
+                    "size": 2048,
+                    "time_modified": 1699941437,
+                    "permissions": "-rw-r--r--"
+                }
+            ]
+        }
+    ]
+}

@@ -1,5 +1,4 @@
 *.pdf 
-*.json
+structure.json
 __pycache__
 *.txt
-test
