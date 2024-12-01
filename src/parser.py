@@ -91,7 +91,7 @@ def get_parser() -> argparse.ArgumentParser:
         "--help",
         action="store_true",
         default=None,
-        help="Filter options to display only files with 'file' or directories with 'dir'.",
+        help="Display the help message.",
     )
     return parser
 
