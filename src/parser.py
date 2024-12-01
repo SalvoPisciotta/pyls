@@ -1,5 +1,5 @@
 import argparse
-from src.exception import InvalidArgumentError
+from src.exceptions import InvalidArgumentError
 import sys
 
 help_string ="""
@@ -24,7 +24,7 @@ The JSON file has to have the following structure:
 }
 """
 
-def get_parser():
+def get_parser() -> argparse.ArgumentParser:
     """
     Creates and returns an argument parser for the pyls command-line tool.
     The parser supports the following arguments:
@@ -90,7 +90,7 @@ def get_parser():
     )
     return parser
 
-def _check_args(args):
+def _check_args(args: argparse.Namespace) -> None:
     """
     Validates the filter argument in the provided args.
     Raises InvalidArgumentError exception if the filter attribute is not 'file', 'dir', or None.
@@ -104,7 +104,7 @@ def _check_args(args):
             f"error: {args.filter} is not a valid filter criteria."
             + "Available filters are 'file' or 'dir'.")
     
-def check_args(args):
+def check_args(args: argparse.Namespace) -> None:
     """
     Check the validity of the provided arguments.
     This function attempts to validate the given arguments by calling `_check_args`.
@@ -113,7 +113,7 @@ def check_args(args):
         args: The arguments to be checked.
     """
     try:
-        _check_args(args)  # This will raise the error
+        _check_args(args) # This will raise the error if present
     except InvalidArgumentError as e:
         # Print only the message without traceback
         print(f"{e}")
