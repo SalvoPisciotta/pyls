@@ -65,7 +65,6 @@ python -m pyls
 - List all files, including hidden files:
 ```
 python -m pyls -A
-python -m pyls -A
 ```
 
 - List files in long format:
