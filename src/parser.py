@@ -2,7 +2,7 @@ import argparse
 from src.exceptions import InvalidArgumentError
 import sys
 
-help_string ="""
+help_string = """
 Python 'ls' command implementation for structured JSON files simulating a file system.
 
 The goal is to navigate through a JSON structure and display the content of files and directories.
@@ -24,6 +24,7 @@ The JSON file has to have the following structure:
 }
 """
 
+
 def get_parser() -> argparse.ArgumentParser:
     """
     Creates and returns an argument parser for the pyls command-line tool.
@@ -38,14 +39,18 @@ def get_parser() -> argparse.ArgumentParser:
     Returns:
         argparse.ArgumentParser: Configured argument parser for pyls.
     """
-    parser = argparse.ArgumentParser(description=help_string,
-                                    add_help=False,
-                                    formatter_class=argparse.RawTextHelpFormatter)
-    
-    parser.add_argument("path",
-                        default= '.',
-                        nargs='?',
-                        help="Path of the folder to navigate on with ls '.' is set by default")
+    parser = argparse.ArgumentParser(
+        description=help_string,
+        add_help=False,
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+
+    parser.add_argument(
+        "path",
+        default=".",
+        nargs="?",
+        help="Path of the folder to navigate on with ls '.' is set by default",
+    )
     parser.add_argument(
         "-A",
         action="store_true",
@@ -80,15 +85,16 @@ def get_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--filter",
         default=None,
-        help="Filter options to display only files with 'file' or directories with 'dir'."
+        help="Filter options to display only files with 'file' or directories with 'dir'.",
     )
     parser.add_argument(
         "--help",
         action="store_true",
         default=None,
-        help="Filter options to display only files with 'file' or directories with 'dir'."
+        help="Filter options to display only files with 'file' or directories with 'dir'.",
     )
     return parser
+
 
 def _check_args(args: argparse.Namespace) -> None:
     """
@@ -98,12 +104,14 @@ def _check_args(args: argparse.Namespace) -> None:
         args: An object that contains the filter attribute.
 
     """
-    
+
     if args.filter not in ["file", "dir", None]:
         raise InvalidArgumentError(
             f"error: {args.filter} is not a valid filter criteria."
-            + "Available filters are 'file' or 'dir'.")
-    
+            + "Available filters are 'file' or 'dir'."
+        )
+
+
 def check_args(args: argparse.Namespace) -> None:
     """
     Check the validity of the provided arguments.
@@ -113,7 +121,7 @@ def check_args(args: argparse.Namespace) -> None:
         args: The arguments to be checked.
     """
     try:
-        _check_args(args) # This will raise the error if present
+        _check_args(args)  # This will raise the error if present
     except InvalidArgumentError as e:
         # Print only the message without traceback
         print(f"{e}")

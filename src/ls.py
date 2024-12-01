@@ -2,20 +2,20 @@ import argparse
 from src.exceptions import InvalidPathError
 from src.utils import human_readable_datetime, human_readable_file_size
 import sys
-from typing import Dict, Union, List
+from typing import Union, List
 from src.structure_types import Directory, File, JsonFileSystemStructure
+
 
 class PyLS:
 
-    def __init__(self,
-                json_structure: Union[Directory, File],
-                options: argparse.Namespace) -> None:
+    def __init__(
+        self, json_structure: Union[Directory, File], options: argparse.Namespace
+    ) -> None:
         self.output = ""
         self.options = options
         self.set_root_structure(json_structure)
 
-    def set_root_structure(self,
-                          json_structure : JsonFileSystemStructure) -> None:
+    def set_root_structure(self, json_structure: JsonFileSystemStructure) -> None:
         """
         Sets the root structure of the JSON data.
         This method sets the root structure of the JSON based on the input path parameter
@@ -24,7 +24,7 @@ class PyLS:
             json_structure (JsonFileSystemStructure): The JSON structure to be set as the root.
         """
 
-        if self.options.path == '.' or self.options.path == json_structure['name']:
+        if self.options.path == "." or self.options.path == json_structure["name"]:
             self.json_root_structure = json_structure
         else:
             try:
@@ -32,8 +32,9 @@ class PyLS:
             except InvalidPathError as error:
                 self.stop_execution_with_message(error)
 
-    def get_root_structure(self,
-                            json_structure: JsonFileSystemStructure) -> JsonFileSystemStructure:
+    def get_root_structure(
+        self, json_structure: JsonFileSystemStructure
+    ) -> JsonFileSystemStructure:
         """
         Retrieves the root structure from a given JSON structure based on the specified path.
         Args:
@@ -41,15 +42,17 @@ class PyLS:
         Returns:
             JsonFileSystemStructure: The root structure corresponding to the specified path.
         """
-        
-        items_to_root = [item for item in self.options.path.split('/') if item != '.']
+
+        items_to_root = [item for item in self.options.path.split("/") if item != "."]
         root_structure = json_structure
         for item_name in items_to_root:
-            for sub_item in root_structure['contents']:
-                if sub_item['name'] == item_name:
+            for sub_item in root_structure["contents"]:
+                if sub_item["name"] == item_name:
                     root_structure = sub_item
         if root_structure == json_structure:
-            raise InvalidPathError(f"cannot access {self.options.path}: No such file or directory")
+            raise InvalidPathError(
+                f"cannot access {self.options.path}: No such file or directory"
+            )
 
         return root_structure
 
@@ -68,10 +71,10 @@ class PyLS:
 
     def get_output(self) -> str:
         return self.output
-    
-    def filtered_sublist(self,
-                        dir_contents: List[JsonFileSystemStructure],
-                        item_type: str) -> List[JsonFileSystemStructure]:
+
+    def filtered_sublist(
+        self, dir_contents: List[JsonFileSystemStructure], item_type: str
+    ) -> List[JsonFileSystemStructure]:
         """
         Filters the directory contents based on the specified item type.
         Args:
@@ -81,15 +84,15 @@ class PyLS:
         Returns:
             List[JsonFileSystemStructure]: List of filtered items based on the specified item type.
         """
-        if item_type == 'dir':
-            sub_items = [item for item in dir_contents if 'contents' in item.keys()]
-        elif item_type == 'file':
-            sub_items = [item for item in dir_contents if 'contents' not in item.keys()]
+        if item_type == "dir":
+            sub_items = [item for item in dir_contents if "contents" in item.keys()]
+        elif item_type == "file":
+            sub_items = [item for item in dir_contents if "contents" not in item.keys()]
         return sub_items
 
-    def get_subitems_list(self,
-                        root_contents: List[JsonFileSystemStructure]
-                        ) -> List[JsonFileSystemStructure]:
+    def get_subitems_list(
+        self, root_contents: List[JsonFileSystemStructure]
+    ) -> List[JsonFileSystemStructure]:
         """
         Extracts and returns list of sub-items from the given root contents.
         Order of the list is based on the input options.
@@ -98,7 +101,7 @@ class PyLS:
         Returns:
             List[JsonFileSystemStructure]: A list of sub-items extracted from the root contents.
         """
-        
+
         if self.options.filter is not None:
             sub_items = self.filtered_sublist(root_contents, self.options.filter)
         else:
@@ -109,8 +112,9 @@ class PyLS:
             sub_items.reverse()
         return sub_items
 
-    def generate_item_names_output(self,
-                                    root_contents: List[JsonFileSystemStructure]) -> None:
+    def generate_item_names_output(
+        self, root_contents: List[JsonFileSystemStructure]
+    ) -> None:
         """
         Generates a string of content names from the given directory contents.
         Args:
@@ -122,7 +126,9 @@ class PyLS:
             else:
                 self.output += item["name"] + " "
 
-    def generate_item_info_output(self, root_contents: List[JsonFileSystemStructure]) -> None:
+    def generate_item_info_output(
+        self, root_contents: List[JsonFileSystemStructure]
+    ) -> None:
         """
         Generates a formatted output string of content informations from the input dir contents.
         Args:
@@ -134,7 +140,7 @@ class PyLS:
             else:
                 self.output += item["permissions"] + " "
                 if self.options.h:
-                    self.output += human_readable_file_size(item["size"])+ " "
+                    self.output += human_readable_file_size(item["size"]) + " "
                 else:
                     self.output += str(item["size"]) + " "
                 self.output += human_readable_datetime(item["time_modified"]) + " "
@@ -147,6 +153,6 @@ class PyLS:
         Args:
             message (str): The message to be printed before stopping the execution.
         """
-        
+
         print(f"{message}")
         sys.exit(0)
