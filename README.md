@@ -64,7 +64,7 @@ python -m pyls
 ```
 - List all files, including hidden files:
 ```
-python -m pyls -a
+python -m pyls -A
 ```
 
 - List files in long format:
@@ -97,6 +97,33 @@ python -m pyls --filter file
 python -m pyls --help
 ```
 
+    ## Installation
+
+    To install the `pyls` application, follow these steps:
+
+    1. Clone the repository:
+        ```sh
+        git clone https://github.com/yourusername/pyls.git
+        ```
+
+    2. Navigate to the project directory:
+        ```sh
+        cd pyls
+        ```
+
+    3. Ensure the JSON file system structured file `structure.json` file is present in the root directory. 
+
+    4. Install the required dependencies:
+        ```sh
+        pip install -e .
+        ```
+
+    5. Once installed you can run the commands described in the previous section just as:
+        ```
+        pyls [options] [path]
+        ```
+
+
 ## Running Tests
 
 To run the tests for this project, navigate to the `pyls/test` directory and execute `pytest`:
@@ -106,7 +133,7 @@ cd pyls/test
 pytest
 ```
 
-Ensure you have `pytest` installed. You can install it using pip if necessary:
+Ensure you have `pytest` installed. You can install it using pip with:
 
 ```sh
 pip install pytest
