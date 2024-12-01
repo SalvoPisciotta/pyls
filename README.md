@@ -65,6 +65,7 @@ python -m pyls
 - List all files, including hidden files:
 ```
 python -m pyls -A
+python -m pyls -A
 ```
 
 - List files in long format:
@@ -133,6 +134,7 @@ cd pyls/test
 pytest
 ```
 
+Ensure you have `pytest` installed. You can install it using pip with:
 Ensure you have `pytest` installed. You can install it using pip with:
 
 ```sh
