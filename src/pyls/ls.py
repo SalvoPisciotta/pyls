@@ -1,9 +1,9 @@
 import argparse
-from src.exceptions import InvalidPathError
-from src.utils import human_readable_datetime, human_readable_file_size
+from pyls.exceptions import InvalidPathError
+from pyls.utils import human_readable_datetime, human_readable_file_size
 import sys
 from typing import Union, List
-from src.structure_types import Directory, File, JsonFileSystemStructure
+from pyls.structure_types import Directory, File, JsonFileSystemStructure
 
 
 class PyLS:

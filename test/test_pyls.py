@@ -1,10 +1,9 @@
 import pytest
 import json
-from src.ls import PyLS
+from pyls.ls import PyLS
 import argparse
 from typing import Optional
-from src.parser import get_parser
-from src.parser import check_args
+from pyls.parser import PyLSParser
 
 test_json_file = "test/test_json.json"
 
@@ -29,13 +28,16 @@ def start_test(test_options: argparse.Namespace) -> str:
     with open(test_json_file) as f:
         sample_json_structure = json.load(f)
 
-    check_args(test_options)
+    parser = PyLSParser()
+    parser.set_args(test_options)
 
-    if test_options.help:
-        parser = get_parser()
-        parser.print_help()
+    parser.check_args()
+
+    if parser.args.help:
+        parser.help_string_output()
     else:
-        pyls = PyLS(json_structure=sample_json_structure, options=test_options)
+        args = parser.args
+        pyls = PyLS(json_structure=sample_json_structure, options=args)
         pyls.generate_output()
 
         return pyls.get_output()
@@ -43,9 +45,10 @@ def start_test(test_options: argparse.Namespace) -> str:
 
 def test_help_output(capfd):
     test_options = simulate_options(help=True, path="")
-    start_test(test_options)
-    captured = capfd.readouterr()
-    assert "usage" in captured.out
+    with pytest.raises(SystemExit):
+        start_test(test_options)
+        captured = capfd.readouterr()
+        assert "usage" in captured.out
 
 
 def test_output():
