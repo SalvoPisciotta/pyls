@@ -63,9 +63,9 @@ To install the `pyls` application, follow these steps:
     cd pyls
     ```
 
-3. Ensure the JSON file system structured file `structure.json` file is present in the root directory. 
+3. Ensure the JSON file system structured file `structure.json` file is present in the root directory. A default one is given, but is possible to change it keeping the same name. 
 
-4. Install the required dependencies:
+5. Install the required dependencies:
     ```sh
     pip install -e .
     ```
