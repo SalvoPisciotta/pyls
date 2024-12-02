@@ -107,9 +107,6 @@ class PyLSParser:
         """
         Validates the filter argument in the provided args.
         Raises InvalidArgumentError exception if the filter attribute is not 'file', 'dir', or None.
-        Args:
-            args: An object that contains the filter attribute.
-
         """
         if self.args.filter not in ["file", "dir", None]:
             raise InvalidArgumentError(
@@ -122,9 +119,6 @@ class PyLSParser:
         Check the validity of the provided arguments.
         This function attempts to validate the given arguments by calling `_check_args`.
         If `InvalidArgumentError` exception is raised, prints error message and exits the program.
-        Args:
-            parser (argparse.ArgumentParser): The argument parser object.
-            args (args: argparse.Namespace): The arguments to be checked.
         """
         try:
             self._check_filter_validity()  # This will raise the error if present
@@ -136,8 +130,6 @@ class PyLSParser:
     def help_string_output(self) -> None:
         """
         Display the help message for the pyls command-line tool.
-        Args:
-            parser (argparse.ArgumentParser): The argument parser object.
         """
         self.parser.print_help()
         sys.exit(0)
