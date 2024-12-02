@@ -49,54 +49,6 @@ with directories that can be distinguished from files due to the presence of `co
     - --filter: Filter options to display only files with 'file' or directories with 'dir'.
     - --help: Display the help message.
 
-## Usage
-
-Run the application with the desired options:
-```sh
-python -m pyls [options] [path]
-```
-
-### Examples
-
-- List all files and directories in the current directory:
-```sh
-python -m pyls
-```
-- List all files, including hidden files:
-```
-python -m pyls -A
-```
-
-- List files in long format:
-```
-python -m pyls -l
-```
-
-- List files in human-readable format:
-```
-python -m pyls -l -h
-```
-
-- List all files and directories in reverse order:
-```
-python -m pyls -A -r
-```
-
-- List all files and directories ordered by last modification timestamp:
-```
-python -m pyls -A -l -t
-```
-
-- List only files
-```
-python -m pyls --filter file
-```
-
-- Display help message:
-```
-python -m pyls --help
-```
-
 ## Installation
 
 To install the `pyls` application, follow these steps:
@@ -118,22 +70,62 @@ To install the `pyls` application, follow these steps:
     pip install -e .
     ```
 
-5. Once installed you can run the commands described in the previous section just as:
+## Usage
+
+Once installed follow the previous steps you can run the commands described in the previous section just as:
     ```
     pyls [options] [path]
     ```
 
+### Examples
+
+- List all files and directories in the current directory:
+```sh
+pyls
+```
+- List all files, including hidden files:
+```
+pyls -A
+```
+
+- List files in long format:
+```
+pyls -l
+```
+
+- List files in human-readable format:
+```
+pyls -l -h
+```
+
+- List all files and directories in reverse order:
+```
+pyls -A -r
+```
+
+- List all files and directories ordered by last modification timestamp:
+```
+pyls -A -l -t
+```
+
+- List only files
+```
+pyls --filter file
+```
+
+- Display help message:
+```
+pyls --help
+```
 
 ## Running Tests
 
-To run the tests for this project, navigate to the `pyls/test` directory and execute `pytest`:
+To run the tests for this project, navigate to the `pyls` directory and execute `pytest`:
 
 ```sh
-cd pyls/test
 pytest
 ```
 
-Ensure you have `pytest` installed. You can install it using pip with:
 Ensure you have `pytest` installed. You can install it using pip with:
 
 ```sh
